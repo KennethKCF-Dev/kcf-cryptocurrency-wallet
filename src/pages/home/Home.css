@@ -12,4 +12,20 @@
     width: 90%;
     /* height: 90%; */
     margin: 0 auto;
-  }
+}
+
+.clipboard-btn{
+    padding: 8px 20px;
+    border-radius: 2px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.clipboard-btn-text{
+
+}
+
+.clipboard-btn-icon{
+    
+}
