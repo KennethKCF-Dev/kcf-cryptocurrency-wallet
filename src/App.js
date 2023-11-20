@@ -34,7 +34,7 @@ function App() {
             <MenuItem value={"0x13881"}>Mumbai Testnet</MenuItem>
           </Select>
       </header>
-      <Router props={{setSeedPhrase, setWallet}} />
+      <Router setSeedPhrase={setSeedPhrase} setWallet={setWallet} />
     </div>
   );
 }
