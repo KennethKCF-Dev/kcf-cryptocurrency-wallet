@@ -28,7 +28,7 @@ function WalletView({
   const getAccountTokens = async () => {
     setIsLoading(true)
 
-    const res = await axios.get(`http://localhost:7771/getTokens`, {
+    const res = await axios.get(`https://wallet.kcfcodingstudio.com/api/getTokens`, {
       params: {
         userAddress: wallet,
         chain: selectedChain
