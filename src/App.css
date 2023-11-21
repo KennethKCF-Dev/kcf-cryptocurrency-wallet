@@ -188,7 +188,7 @@ header {
 }
 
 .walletView {
-  width: 350px;
+  width: 94%;
   padding: 10px;
   height: 100%;
   overflow-y: auto;

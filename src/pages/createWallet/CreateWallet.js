@@ -10,6 +10,7 @@ function CreateWallet({
 
     const [newSeedPhrase, setNewSeedPhrase] = useState(null);
 
+    const navigate = useNavigate();
 
     const generateWallet = () => {
         const mnemonic = ethers.Wallet.createRandom().mnemonic.phrase;
@@ -19,9 +20,10 @@ function CreateWallet({
     const setWaletAndMnemonic = () => {
         setSeedPhrase(newSeedPhrase)
         setWallet(ethers.Wallet.fromPhrase(newSeedPhrase).address)
+        navigate('/wallet')
     }
 
-    const navigate = useNavigate();
+    
 
     return (
         <div className='content'>
