@@ -64,6 +64,9 @@ rgb(193,105,68)
   align-items: center;
   display: flex;
   flex-direction: column;
+  margin: 2rem auto;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 5px rgb(0, 0, 0, 0.5);
 }
 
 .frontPageLogo {
@@ -116,9 +119,12 @@ header {
   height: 80px;
   background-color: #f9f9f9;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  ;
   align-items: center;
   margin-bottom: 30px;
+  border-radius: 1rem 1rem 0 0;
+  box-shadow: 0px 1px 5px -2px rgb(0, 0, 0, 0.5);
 }
 
 .headerLogo {
@@ -133,8 +139,8 @@ header {
 
 .content {
   text-align: center;
-  width: 350px;
-  height: 520px;
+  width: 90%;
+  height: 100%;
   overflow-y: auto;
   justify-content: flex-start;
   align-items: center;
@@ -208,4 +214,45 @@ header {
   width: 240px;
   object-fit: cover;
   border-radius: 10px;
+}
+
+.passwordRow {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.copyButton {
+  border-radius: 5rem !important;
+  height: 2rem;
+  background-color: #1976d2d4 !important;
+  margin: 1rem !important;
+}
+
+.copyButtonIcon {
+  margin-left: 1rem;
+}
+
+.refreshButton {
+  align-items: flex-start;
+  display: flex;
+  height: 20%;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 15px;
+  gap: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .App {
+    margin: 0 auto;
+    border-radius: 0;
+  }
+
+  header {
+    border-radius: 0;
+  }
 }

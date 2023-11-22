@@ -6,18 +6,23 @@ import { Button, OutlinedInput } from '@mui/material';
 
 function RecoverWallet({
   setSeedPhrase,
-  setWallet
+  setWallet,
+  password
 }) {
-  const [ typeSeed, setTypeSeed ] = useState("");
-  const [ nonValid, setNonValid ] = useState(false);
+  const [typeSeed, setTypeSeed] = useState("");
+  const [nonValid, setNonValid] = useState(false);
 
   const navigate = useNavigate();
 
-  const recoverWallet = () => {
+  const recoverWallet = async () => {
     let recoveredWallet;
-    try{
+    try {
       recoveredWallet = ethers.Wallet.fromPhrase(typeSeed);
-    }catch(err){
+
+      const encryptedJson = await recoveredWallet.encrypt(password);
+
+      localStorage.setItem("walletEncryptedJson", encryptedJson)
+    } catch (err) {
       setNonValid(true)
       return;
     }
@@ -61,7 +66,7 @@ function RecoverWallet({
       >
         Recover Wallet
       </Button>
-      {nonValid && <p style={{ color: "red"}}> Invalid Seed Phrase </p>}
+      {nonValid && <p style={{ color: "red" }}> Invalid Seed Phrase </p>}
       <p className='frontPageBottom' onClick={() => navigate("/")}>
         Back Home
       </p>

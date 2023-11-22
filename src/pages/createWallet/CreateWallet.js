@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import GppMaybeOutlinedIcon from '@mui/icons-material/GppMaybeOutlined';
-import { Button, Card } from '@mui/material';
+import { Button, Card, CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { ethers } from "ethers";
+import copy from 'copy-to-clipboard';
+import { toast } from 'react-toastify';
 
 function CreateWallet({
-    setSeedPhrase,setWallet
+    setSeedPhrase,
+    setWallet,
+    password
 }) {
 
     const [newSeedPhrase, setNewSeedPhrase] = useState(null);
@@ -17,13 +21,30 @@ function CreateWallet({
         setNewSeedPhrase(mnemonic);
     }
 
-    const setWaletAndMnemonic = () => {
+    const setWaletAndMnemonic = async () => {
         setSeedPhrase(newSeedPhrase)
-        setWallet(ethers.Wallet.fromPhrase(newSeedPhrase).address)
+        const wallet = ethers.Wallet.fromPhrase(newSeedPhrase)
+
+        try {
+            const encryptedJson = await wallet.encrypt(password);
+
+            localStorage.setItem("walletEncryptedJson", encryptedJson)
+        } catch (err) {
+            console.log('Failed')
+        }
+
+
+        setWallet(wallet.address)
         navigate('/wallet')
     }
 
-    
+    const copyToClipboard = () => {
+        let copyText = newSeedPhrase;
+        let isCopy = copy(copyText);
+        if (isCopy) {
+            toast.success("Copied to Clipboard");
+        }
+    };
 
     return (
         <div className='content'>
@@ -47,17 +68,27 @@ function CreateWallet({
                 className='seedPhraseContainer'
                 variant="outlined"
             >
-                {newSeedPhrase && 
-                    <pre 
-                        style={{
-                            whiteSpace: "pre-wrap",
-                            fontSize: "1rem"
-                        }}
-                    >
-                        {newSeedPhrase}
-                    </pre>
-                }
+                <CardActionArea
+                    disabled={newSeedPhrase === null}
+                    style={{
+                        width: '100%',
+                        height: '100%'
+                    }}
+                    onClick={copyToClipboard}
+                >
+                    {newSeedPhrase &&
+                        <pre
+                            style={{
+                                whiteSpace: "pre-wrap",
+                                fontSize: "1rem"
+                            }}
+                        >
+                            {newSeedPhrase}
+                        </pre>
+                    }
+                </CardActionArea>
             </Card>
+            {newSeedPhrase && <h5 style={{margin: '1rem auto'}}>Press to copy your key phrase</h5>}
             <Button
                 className='frontPageButton signin'
                 color='info'

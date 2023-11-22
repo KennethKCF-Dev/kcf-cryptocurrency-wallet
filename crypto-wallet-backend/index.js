@@ -9,27 +9,37 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/getTokens", async (req, res) => {
+  try{
+    const { userAddress, chain } = req.query;
 
-  const { userAddress, chain } = req.query;
-
-  const tokens = await Moralis.EvmApi.token.getWalletTokenBalances({
-    chain: chain,
-    address: userAddress,
-  });
-
-  const balance = await Moralis.EvmApi.balance.getNativeBalance({
-    chain: chain,
-    address: userAddress
-  });
-
-  const jsonResponse = {
-    tokens: tokens.raw,
-    //nfts: myNfts,
-    balance: balance.raw.balance / (10 ** 18)
+    const tokens = await Moralis.EvmApi.token.getWalletTokenBalances({
+      chain: chain,
+      address: userAddress,
+    });
+  
+    const transaction = await Moralis.EvmApi.transaction.getWalletTransactions({
+      address: userAddress,
+      chain: chain,
+    });
+  
+    const balance = await Moralis.EvmApi.balance.getNativeBalance({
+      chain: chain,
+      address: userAddress
+    });
+  
+    const jsonResponse = {
+      tokens: tokens.raw,
+      transactions: transaction.result,
+      //nfts: myNfts,
+      balance: balance.raw.balance / (10 ** 18)
+    }
+  
+    console.log(jsonResponse)
+    return res.status(200).json(jsonResponse);
+  }catch(err){
+    console.log(err)
+    return res.status(400).json(err);
   }
-
-  console.log(jsonResponse)
-  return res.status(200).json(jsonResponse);
 });
 
 Moralis.start({
