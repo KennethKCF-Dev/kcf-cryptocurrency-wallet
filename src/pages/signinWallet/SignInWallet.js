@@ -95,6 +95,7 @@ function SignInWallet({
             <TextField
               fullWidth
               label="Password"
+              type="password"
               variant="outlined"
               onChange={(e) => validPasswordLength(e.target.value)}
               placeholder='New Password (min 8 chars)'
@@ -104,6 +105,7 @@ function SignInWallet({
             <TextField
               fullWidth
               label="Comfirm Password"
+              type="password"
               variant="outlined"
               onChange={(e) => validConfirmPassword(e.target.value)}
               placeholder='Comfirm Password'
