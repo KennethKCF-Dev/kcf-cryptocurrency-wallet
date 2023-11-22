@@ -68,6 +68,7 @@ function SignInWallet({
             <TextField
               fullWidth
               label="Password"
+              type="password"
               variant="outlined"
               onChange={(e) => setPassword(e.target.value)}
               placeholder='Password'
