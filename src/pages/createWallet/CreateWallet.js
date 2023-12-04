@@ -93,6 +93,7 @@ function CreateWallet({
                 className='frontPageButton signin'
                 color='info'
                 variant="outlined"
+                disabled={!newSeedPhrase}
                 onClick={() => setWaletAndMnemonic()}
             >
                 Create Your New Wallet

@@ -123,7 +123,6 @@ header {
   justify-content: space-between;
   ;
   align-items: center;
-  margin-bottom: 30px;
   border-radius: 1rem 1rem 0 0;
   box-shadow: 0px 1px 5px -2px rgb(0, 0, 0, 0.5);
 }
@@ -139,6 +138,7 @@ header {
 }
 
 .content {
+  margin-top: 2rem;
   text-align: center;
   width: 90%;
   height: 100%;
@@ -251,6 +251,17 @@ header {
 .refreshButton:hover {
   cursor: pointer;
   color: gray;
+}
+
+.modal{
+  position: 'absolute' !important;
+  top: '50%' !important;
+  left: '50%' !important;
+  transform: 'translate(-50%, -50%)' !important;
+  width: 400 !important;
+  background-color: 'background.paper' !important;
+  border: '2px solid #000' !important;
+  box-shadow: 24 !important;
 }
 
 

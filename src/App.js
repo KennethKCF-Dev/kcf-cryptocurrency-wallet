@@ -27,6 +27,7 @@ function App() {
   const [isRecover, setIsRecover] = useState(false);
   const [isNew, setIsNew] = useState(false);
   const [encryptedJson, setEncryptedJson] = useState(null);
+  const [disableChainSelector, setDisableChainSelector] = useState(false)
 
   const onChangeSelectedChain = (event) => {
     return setSelectedChain(event.target.value);
@@ -40,6 +41,7 @@ function App() {
   return (
     <div className="App">
       <ToastContainer
+        containerId={'error'}
         position="top-center"
         autoClose={500}
         hideProgressBar
@@ -53,16 +55,16 @@ function App() {
       />
       <header>
         <img className='headerLogo' alt='logo' src={walletLogo_bw} />
-        <Select value={selectedChain} onChange={onChangeSelectedChain} className='dropdown'>
+        <Select disabled={disableChainSelector} value={selectedChain} onChange={onChangeSelectedChain} className='dropdown'>
           <MenuItem value={"0xaa36a7"}>Sepolia Ethereum</MenuItem>
           <MenuItem value={"0x5"}>Goerli Ethereum</MenuItem>
-          <MenuItem value={"0x80001"}>Polygon Mumbai</MenuItem>
+          <MenuItem value={"0x13881"}>Polygon Mumbai</MenuItem>
         </Select>
       </header>
       {wallet && seedPhrase ?
         <Routes>
           <Route path='/wallet' exact element={
-            <WalletView wallet={wallet} setWallet={setWallet} seedPhrase={seedPhrase} setSeedPhrase={setSeedPhrase} selectedChain={selectedChain} setEncryptedJson={setEncryptedJson} />
+            <WalletView wallet={wallet} setDisableChainSelector={setDisableChainSelector} setWallet={setWallet} seedPhrase={seedPhrase} setSeedPhrase={setSeedPhrase} selectedChain={selectedChain} setEncryptedJson={setEncryptedJson} />
           } />
         </Routes>
         :
