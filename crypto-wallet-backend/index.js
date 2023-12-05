@@ -3,10 +3,13 @@ const Moralis = require("moralis").default;
 const app = express();
 const cors = require("cors");
 require("dotenv").config();
+const helmet = require('helmet')
 const port = 7771;
 
 app.use(cors());
 app.use(express.json());
+app.use(helmet())
+app.disable('x-powered-by')
 
 app.get("/getTokens", async (req, res) => {
   try{
@@ -36,9 +39,9 @@ app.get("/getTokens", async (req, res) => {
   
     console.log(jsonResponse)
     return res.status(200).json(jsonResponse);
-  }catch(err){
+  } catch (err) {
     console.log(err)
-    return res.status(400).json(err.message);
+    return res.status(404).json(err.message);
   }
 });
 

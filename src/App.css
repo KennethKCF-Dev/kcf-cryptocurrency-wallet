@@ -253,18 +253,6 @@ header {
   color: gray;
 }
 
-.modal{
-  position: 'absolute' !important;
-  top: '50%' !important;
-  left: '50%' !important;
-  transform: 'translate(-50%, -50%)' !important;
-  width: 400 !important;
-  background-color: 'background.paper' !important;
-  border: '2px solid #000' !important;
-  box-shadow: 24 !important;
-}
-
-
 @media screen and (max-width: 600px) {
   .App {
     margin: 0 auto;

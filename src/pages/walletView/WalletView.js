@@ -273,7 +273,7 @@ function WalletView({
                 label="To:"
                 variant="outlined"
                 typeof='number'
-                value={sendToAddress}
+                value={sendToAddress || undefined}
                 onChange={(e) => setSendToAddress(e.target.value)}
                 placeholder='0x'
               />
@@ -284,7 +284,7 @@ function WalletView({
                 label="Amounts:"
                 variant="outlined"
                 type='number'
-                value={amountToSend}
+                value={amountToSend || undefined}
                 onChange={(e) => {
                   if (sendToAddress) {
                     getTxGasFee(sendToAddress, e.target.value)
